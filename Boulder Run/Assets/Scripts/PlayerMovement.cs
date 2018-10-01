@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour {
 	public KeyCode forward;
 	Rigidbody rb;
 	Vector3 vel = new Vector3();
-	Vector3 jumpVel = new Vector3();
 	bool onFloor;
 	// Use this for initialization
 	void Start () {
