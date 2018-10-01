@@ -277,7 +277,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: bbc50c860c08d0c4d84fec0056ccc947, type: 2}
+  - {fileID: 2100000, guid: 1e6f552140537a946be03727347a755e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 455029660}
+  pla: {fileID: 0}
 --- !u!81 &864012662
 AudioListener:
   m_ObjectHideFlags: 0
