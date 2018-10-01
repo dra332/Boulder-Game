@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
 	public GameObject player;
+	public Transform pla;
 	Vector3 temp; 
 	// Use this for initialization
 	void Start () {
@@ -14,5 +15,6 @@ public class CameraMovement : MonoBehaviour {
 	void Update () {
 		temp.z = player.transform.position.z - 5f;
 		transform.position = temp;
+		//transform.LookAt (pla);
 	}
 }
