@@ -7,6 +7,10 @@ TagManager:
   - Floor
   - Control
   - Boulder
+  - WallKiller
+  - WallTrigger
+  - ObstacleKiller
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,8 +21,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Obstacle
+  - Wall
   - 
   - 
   - 
