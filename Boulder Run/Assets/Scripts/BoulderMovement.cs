@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoulderMovement : MonoBehaviour {
 	Rigidbody rb;
 	public Vector3 vel = new Vector3();
-	Vector3 pos = new Vector3();
+	//Vector3 pos = new Vector3();
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
@@ -20,8 +20,5 @@ public class BoulderMovement : MonoBehaviour {
 			//rb.velocity = vel;
 		//}
 
-		pos = transform.position;
-		pos.z += 0.2f;
-		transform.position = pos;
 	}
 }
