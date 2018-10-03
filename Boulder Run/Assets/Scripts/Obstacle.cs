@@ -13,6 +13,8 @@ public class Obstacle : MonoBehaviour {
 		obsBody=gameObject.GetComponent<Rigidbody> ();
 
 		obsBody.velocity = new Vector3 (0,0,obsSpeed);
+
+		gameObject.transform.eulerAngles = new Vector3 (0f, 0f, 90f);
 	}
 
 	// Update is called once per frame

@@ -13,9 +13,9 @@ public class ObstacleSpawner : MonoBehaviour {
 	GameObject instObs;
 
 	void Start () {
+	
 		spawnPos = gameObject.transform.position;
-
-		InvokeRepeating ("spawnObs", 1f,1f);
+	
 	}
 
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class ObstacleSpawner : MonoBehaviour {
 
 	}
 
-	void spawnObs(){
+	public void spawnObs(){
 
 		instObs = Instantiate (obs, spawnPos, Quaternion.identity);
 
