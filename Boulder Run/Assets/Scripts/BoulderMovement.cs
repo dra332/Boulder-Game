@@ -21,4 +21,12 @@ public class BoulderMovement : MonoBehaviour {
 		//}
 
 	}
+
+	public void DeathSpeed()
+	{
+		rb.constraints = RigidbodyConstraints.None;
+		rb.constraints = RigidbodyConstraints.FreezeRotation|RigidbodyConstraints.FreezePositionX|RigidbodyConstraints.FreezePositionY;
+		rb.useGravity = false;
+		rb.velocity = vel;
+	}
 }

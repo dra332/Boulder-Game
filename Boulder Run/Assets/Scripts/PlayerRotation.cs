@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour {
 	Animator anim;
+	public CameraMovement cm;
+	public BoulderMovement bm;
 	public GameObject charMod;
 	public GameObject boulder;
 	public KeyCode slow;
@@ -14,7 +16,7 @@ public class PlayerRotation : MonoBehaviour {
 	public float speed;
 	HingeJoint hinge;
 	SpringJoint spring;
-	Vector3 vel = new Vector3();
+	public Vector3 vel = new Vector3();
 	Vector3 pos = new Vector3();
 	Rigidbody rb;
 	Rigidbody br;
@@ -24,13 +26,13 @@ public class PlayerRotation : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		anim = charMod.GetComponent<Animator> ();
-		vel.y = 7f;
 		hinge = GetComponent<HingeJoint> ();
 		br = boulder.GetComponent<Rigidbody> ();
 		hasJoint = true;
 		hasJump = false;
 		hinge.enableCollision = true;
 		anim.SetBool ("Breath", false);
+		cm.dead = false;
 	}
 
 	// Update is called once per frame
@@ -82,7 +84,7 @@ public class PlayerRotation : MonoBehaviour {
 			rb.isKinematic = false;
 			gameObject.AddComponent<SpringJoint> ();
 			spring = GetComponent<SpringJoint> ();
-			spring.enableCollision = false;
+			spring.enableCollision = true;
 			spring.connectedBody = br;
 			spring.spring = 10f;
 			spring.anchor = Vector3.zero;
@@ -117,7 +119,10 @@ public class PlayerRotation : MonoBehaviour {
 		}
 
 		if (other.gameObject.CompareTag ("Death Zone")) {
-			this.gameObject.SetActive (false);
+			Destroy (hinge);
+			rb.isKinematic = false;
+			cm.dead = true;
+			bm.DeathSpeed ();
 		}
 	}
 
