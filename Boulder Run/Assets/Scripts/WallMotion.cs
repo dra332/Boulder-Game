@@ -27,4 +27,10 @@ public class WallMotion : MonoBehaviour {
 		Destroy (gameObject);
 		}
 	}
+
+	public void stop(){
+
+		wallBody.velocity = new Vector3 (0f, 0f, 0f);
+
+	}
 }

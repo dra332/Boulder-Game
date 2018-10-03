@@ -15,6 +15,8 @@ public class Obstacle : MonoBehaviour {
 		obsBody.velocity = new Vector3 (0,0,obsSpeed);
 
 		gameObject.transform.eulerAngles = new Vector3 (0f, 0f, 90f);
+
+		//Time.timeScale = 0.5f;
 	}
 
 	// Update is called once per frame
@@ -27,5 +29,11 @@ public class Obstacle : MonoBehaviour {
 		if(obj.gameObject.tag.Equals("ObstacleKiller")){
 			Destroy (gameObject);
 		}
+	}
+
+	public void stop(){
+	
+		obsBody.velocity = new Vector3 (0f, 0f, 0f);
+	
 	}
 }

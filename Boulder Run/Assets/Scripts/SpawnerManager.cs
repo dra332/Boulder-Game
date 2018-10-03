@@ -115,5 +115,9 @@ public class SpawnerManager : MonoBehaviour {
 		}
 	}
 
+	public void stop(){
 
+		CancelInvoke ();
+
+	}
 }
