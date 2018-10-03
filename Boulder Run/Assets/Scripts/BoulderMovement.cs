@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoulderMovement : MonoBehaviour {
+	bool run;
 	Rigidbody rb;
-	public Vector3 vel = new Vector3();
-	//Vector3 pos = new Vector3();
+	Vector3 pos = new Vector3();
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		rb.velocity = vel;
+		run = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//rb.velocity = vel;
-		//if (transform.position.z >= 0f) {
-			//vel.z = 7.5f;
-			//rb.velocity = vel;
-		//}
-
+		if (run == true) {
+			pos = transform.position;
+			pos.z += 0.5f;
+			transform.position = pos;
+		}
 	}
 
 	public void DeathSpeed()
 	{
-		rb.constraints = RigidbodyConstraints.None;
-		rb.constraints = RigidbodyConstraints.FreezeRotation|RigidbodyConstraints.FreezePositionX|RigidbodyConstraints.FreezePositionY;
 		rb.useGravity = false;
-		rb.velocity = vel;
+		rb.isKinematic = true;
+		run = true;
+
 	}
 }

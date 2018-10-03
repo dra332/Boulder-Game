@@ -32,46 +32,47 @@ public class PlayerRotation : MonoBehaviour {
 		hasJump = false;
 		hinge.enableCollision = true;
 		anim.SetBool ("Breath", false);
-		cm.dead = false;
+		hinge.enableCollision = true;
+
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(forward)) {
+		if (Input.GetKey(forward) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, speed * Time.deltaTime);
 			anim.SetBool ("Running", true);
 			anim.SetBool ("Breath", false);
 		}
-		if (Input.GetKey (back)) {
+		if (Input.GetKey (back) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime));
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Running", true);
 		}
-		if (Input.GetKey (forward) && Input.GetKey(slow)) {
+		if (Input.GetKey (forward) && Input.GetKey(slow) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, (speed-50f) * Time.deltaTime);
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Running", true);
 		}
-		if (Input.GetKey (back) && Input.GetKey(slow)) {
+		if (Input.GetKey (back) && Input.GetKey(slow) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, -((speed-50f) * Time.deltaTime));
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Running", true);
 		}
-		if (Input.GetKey (forward) && Input.GetKey(fast)) {
+		if (Input.GetKey (forward) && Input.GetKey(fast) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, (speed*1.5f) * Time.deltaTime);
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Running", true);
 		}
-		if (Input.GetKey (back) && Input.GetKey(fast)) {
+		if (Input.GetKey (back) && Input.GetKey(fast) && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, -((speed*1.5f) * Time.deltaTime));
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Running", true);
 		}
 
-		if (transform.position.z - boulder.transform.position.z >= 0) {
+		if (transform.position.z - boulder.transform.position.z >= 0 && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, (speed * Time.deltaTime)/5f);
 			//anim.SetBool ("Breath", true);
-		} else if (transform.position.z - boulder.transform.position.z < 0) {
+		} else if (transform.position.z - boulder.transform.position.z < 0 && cm.dead == false) {
 			transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime)/5f);
 			//anim.SetBool ("Breath", true);
 		}
@@ -94,10 +95,6 @@ public class PlayerRotation : MonoBehaviour {
 			anim.SetBool ("Breath", false);
 			anim.SetBool ("Jump", true);
 		}
-
-		if (transform.rotation.x >= 45f || transform.rotation.x <= -45f) {
-			this.gameObject.SetActive (false);
-		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -118,12 +115,7 @@ public class PlayerRotation : MonoBehaviour {
 			anim.SetBool ("Jump", false);
 		}
 
-		if (other.gameObject.CompareTag ("Death Zone")) {
-			Destroy (hinge);
-			rb.isKinematic = false;
-			cm.dead = true;
-			bm.DeathSpeed ();
-		}
+
 	}
 
 	void OnTriggerExit(Collider other)
