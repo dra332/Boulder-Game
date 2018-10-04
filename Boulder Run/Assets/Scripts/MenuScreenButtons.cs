@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class Menu : MonoBehaviour {
+public class MenuScreenButtons: MonoBehaviour {
 
 	// Use this for initialization
 
@@ -29,27 +29,24 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void quitGame(){
-
 		Application.Quit();
-
 	}
 
 	public void toPlayLevel(){
-
-		SceneManager.LoadScene ("Level1");// change to appropriate scene name
-
+		SceneManager.LoadScene ("Game");// change to appropriate scene name
 	}
 
 	public void toMenu(){
+		SceneManager.LoadScene ("Main Menu");
+	}
 
-		SceneManager.LoadScene ("MainMenu");
-
+	public void toHow(){
+		SceneManager.LoadScene ("How To");
 	}
 
 	public void resetLevel(){
 
 		SceneManager.LoadScene(SceneManager.GetActiveScene ().buildIndex);
-
 	}
 
 	public void playsound (){

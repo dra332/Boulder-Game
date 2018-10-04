@@ -6,6 +6,7 @@ public class PlayerRotation : MonoBehaviour {
 	Animator anim;
 	public CameraMovement cm;
 	public BoulderMovement bm;
+	public MenuControl mc;
 	public GameObject charMod;
 	public GameObject boulder;
 	public KeyCode slow;
@@ -31,69 +32,65 @@ public class PlayerRotation : MonoBehaviour {
 		hasJoint = true;
 		hasJump = false;
 		hinge.enableCollision = true;
-		anim.SetBool ("Breath", false);
-		hinge.enableCollision = true;
-
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(forward) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, speed * Time.deltaTime);
-			anim.SetBool ("Running", true);
-			anim.SetBool ("Breath", false);
-		}
-		if (Input.GetKey (back) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime));
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Running", true);
-		}
-		if (Input.GetKey (forward) && Input.GetKey(slow) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, (speed-50f) * Time.deltaTime);
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Running", true);
-		}
-		if (Input.GetKey (back) && Input.GetKey(slow) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, -((speed-50f) * Time.deltaTime));
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Running", true);
-		}
-		if (Input.GetKey (forward) && Input.GetKey(fast) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, (speed*1.5f) * Time.deltaTime);
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Running", true);
-		}
-		if (Input.GetKey (back) && Input.GetKey(fast) && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, -((speed*1.5f) * Time.deltaTime));
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Running", true);
-		}
+		if (mc.hasStart == true) {
+			if (Input.GetKey (forward) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, speed * Time.deltaTime);
+				anim.SetBool ("Running", true);
+				anim.SetBool ("Breath", false);
+			}
+			if (Input.GetKey (back) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime));
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Running", true);
+			}
+			if (Input.GetKey (forward) && Input.GetKey (slow) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, (speed - 50f) * Time.deltaTime);
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Running", true);
+			}
+			if (Input.GetKey (back) && Input.GetKey (slow) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, -((speed - 50f) * Time.deltaTime));
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Running", true);
+			}
+			if (Input.GetKey (forward) && Input.GetKey (fast) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, (speed * 1.1f) * Time.deltaTime);
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Running", true);
+			}
+			if (Input.GetKey (back) && Input.GetKey (fast) && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, -((speed * 1.1f) * Time.deltaTime));
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Running", true);
+			}
 
-		if (transform.position.z - boulder.transform.position.z >= 0 && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, (speed * Time.deltaTime)/5f);
-			//anim.SetBool ("Breath", true);
-		} else if (transform.position.z - boulder.transform.position.z < 0 && cm.dead == false) {
-			transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime)/5f);
-			//anim.SetBool ("Breath", true);
-		}
+			if (transform.position.z - boulder.transform.position.z >= 0 && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, (speed * Time.deltaTime) / 5f);
+			} else if (transform.position.z - boulder.transform.position.z < 0 && cm.dead == false) {
+				transform.RotateAround (boulder.transform.position, Vector3.right, -(speed * Time.deltaTime) / 5f);
+			}
 
-		if (Input.GetKeyDown (jump) && hasJump == false) {
-			hasJump = true;
-			Destroy (hinge);
-			hasJoint = false;
-			rb.constraints = RigidbodyConstraints.FreezeRotation;
-			rb.isKinematic = false;
-			gameObject.AddComponent<SpringJoint> ();
-			spring = GetComponent<SpringJoint> ();
-			spring.enableCollision = true;
-			spring.connectedBody = br;
-			spring.spring = 10f;
-			spring.anchor = Vector3.zero;
-			pos = transform.position;
-			rb.AddForce (vel, ForceMode.Impulse);
-			anim.SetBool ("Running", false);
-			anim.SetBool ("Breath", false);
-			anim.SetBool ("Jump", true);
+			if (Input.GetKeyDown (jump) && hasJump == false) {
+				hasJump = true;
+				Destroy (hinge);
+				hasJoint = false;
+				rb.constraints = RigidbodyConstraints.FreezeRotation;
+				rb.isKinematic = false;
+				gameObject.AddComponent<SpringJoint> ();
+				spring = GetComponent<SpringJoint> ();
+				spring.enableCollision = true;
+				spring.connectedBody = br;
+				spring.spring = 10f;
+				spring.anchor = Vector3.zero;
+				rb.AddForce (vel, ForceMode.Impulse);
+				anim.SetBool ("Running", false);
+				anim.SetBool ("Breath", false);
+				anim.SetBool ("Jump", true);
+			}
 		}
 	}
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour {
 	public CameraMovement cm;
 	public BoulderMovement bm;
+	public MenuControl mc;
 	public GameObject charMod;
 	Rigidbody rb;
 	HingeJoint hinge;
@@ -33,6 +34,8 @@ public class PlayerDeath : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Death Zone")) {
 			Destroy (hinge);
 			cm.dead = true;
+			mc.deathText.gameObject.SetActive (true);
+			mc.otherDeath.gameObject.SetActive (true);
 			bm.DeathSpeed ();
 		}
 	}
